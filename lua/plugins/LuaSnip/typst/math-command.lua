@@ -147,8 +147,26 @@ return {
     ),
 
     s(
+        { trig = "cint", regTrig = true, wordTrig = false,snippetType = "autosnippet",priority = 2000},
+        fmta("integral.cont_(<>) <> dif <>", {
+            i(1),
+            i(2),
+            i(3),
+        })
+    ),
+
+    s(
+        { trig = "sint", regTrig = true, wordTrig = false,snippetType = "autosnippet",priority = 2000},
+        fmta("integral.surf_(<>) <> dif <>", {
+            i(1),
+            i(2),
+            i(3),
+        })
+    ),
+    
+    s(
         { trig = "2int", regTrig = true, wordTrig = false, snippetType = "autosnippet", priority = 2000 },
-        fmta("integral_(<>)^(<>) integral_(<>)^(<>) <>  d <> d <>", {
+        fmta("integral_(<>)^(<>) integral_(<>)^(<>) <>  dif <> dif <>", {
             i(1),
             i(2),
             i(3),
@@ -161,7 +179,7 @@ return {
 
     s(
         { trig = "iint", regTrig = true, wordTrig = false, snippetType = "autosnippet", priority = 2000 },
-        fmta("integral.double_(<>) <> d <>", {
+        fmta("integral.double_(<>) <> dif <>", {
             i(1),
             i(2),
             i(3),
