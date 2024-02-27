@@ -2,34 +2,25 @@
 #import "@preview/ctheorems:1.1.0": *
 
 #let template(
-  
   title: "Notes Title",
   authors: (
-      // name: "",
-      // github: "",
-      // link: "",
-      // affiliations: "1,2",
+    // name: "",
+    // github: "",
+    // link: "",
+    // affiliations: "1,2",
   ),
-
   // 页面尺寸，同时会影响页边距。
   paper_size: "a4",
-
   // 文本和代码的字体
   text_font: "Times New Roman",
   sc_font: "Noto Sans CJK SC",
-
   // 主题颜色，必须是 HEX 颜色.
   accent: "#000000",
-
-
   cover_image: none,
   background_color: yellow.lighten(96%),
-
   // 笔记内容
-  body
-
+  body,
 ) = {
-
   let accent_color = rgb(accent)
 
   // 使用 ctheorems 包
@@ -56,7 +47,7 @@
     if it.body.has("text") and it.body.text in author_names {
       it
     } else {
-      underline(stroke: (dash: "densely-dotted"), text(fill: blue, it)) 
+      underline(stroke: (dash: "densely-dotted"), text(fill: blue, it))
     }
   }
 
@@ -73,58 +64,55 @@
     numbering: "1 / 1",
     number-align: center,
     // 页边距
-    margin: (x:1.6cm, y:2.3cm),
-
+    margin: (x: 1.6cm, y: 2.3cm),
     // 封面背景图片
     background: locate(loc => {
       if loc.page() == 1 and cover_image != none {
         layout(size => {
           image(cover_image, height: size.height)
         })
-      } else if background_color != none{
+      } else if background_color != none {
         layout(size => {
-          block(width:100%, height:100%, fill: rgb(background_color))
+          block(width: 100%, height: 100%, fill: rgb(background_color))
         })
       }
     }),
-  
+    header: locate(
+      loc => {
+        if loc.page() == 1 { return }
+        let footers = query(selector(<__footer__>).after(loc), loc)
 
+        let elems = query(
+          heading.where(level: 1).before(footers.first().location()),
+          footers.first().location(),
+        )
+        if elems == () { return }
+        let head_title = text()[
+          title
+        ]
 
-    header: locate(loc => {
-      if loc.page() == 1{return}
-      let footers = query(selector(<__footer__>).after(loc), loc)
+        if calc.even(loc.page()) == true {
+          emph(elems.last().body) + h(1fr) + emph(head_title)
+        } else {
+          emph(head_title) + h(1fr) + emph(elems.last().body)
+        }
 
-      let elems = query(
-        heading.where(level: 1).before(footers.first().location()), footers.first().location()
-      )
-      if elems == () {return}
-      let head_title = text()[
-        title
-      ]
-      
-      if calc.even(loc.page()) == true {
-        emph(elems.last().body) + h(1fr) + emph(head_title)
-      }else{
-        emph(head_title) + h(1fr) + emph(elems.last().body)
-      }
-      
-      v(-7pt)
-      align(center)[#line(length: 105%, stroke: (thickness: 1pt, dash: "solid"))]
-      
-    }),
-
+        v(-7pt)
+        align(center)[#line(length: 105%, stroke: (thickness: 1pt, dash: "solid"))]
+      },
+    ),
     footer: locate(loc => {
-      if loc.page() == 1 {return}
+      if loc.page() == 1 { return }
       [
         #if calc.even(loc.page()) == true {
-            align(left)[#counter(page).display("1 / 1",both: true,)]
-        }else{
-            align(right)[#counter(page).display("1 / 1",both: true,)]
+          align(left)[#counter(page).display("1 / 1", both: true)]
+        } else {
+          align(right)[#counter(page).display("1 / 1", both: true)]
         }
-      #footnotecounter.update(())
-      #label("__footer__")
+        #footnotecounter.update(())
+        #label("__footer__")
       ]
-    })
+    }),
   )
 
   // 配置列表
@@ -148,37 +136,33 @@
     #it.body
     #v(12pt, weak: true)
 
-    #if it.level == 1 and it.numbering != none{
+    #if it.level == 1 and it.numbering != none {
       chaptercounter.step()
     }
   ]
 
   // 配置一级标题
-  show heading.where(
-    level: 1
-  ): it => box(width: 100%)[
+  show heading.where(level: 1): it => box(width: 100%)[
     #set align(left)
     #set heading(numbering: "章节 1. ")
     #set text(fill: accent_color)
     #it
     #v(-12pt)
-    #line(length:100%, stroke: gray)
+    #line(length: 100%, stroke: gray)
   ]
 
   // 配置公式的编号和间距
-  set math.equation(
-    numbering: (..nums) => locate(loc => {
-      numbering("(1.1)", chaptercounter.at(loc).first(), ..nums)
-    })
-  )
-  
+  //set math.equation(numbering: (..nums) => locate(loc => {
+  // numbering("(1.1.1)", chaptercounter.at(loc).first(), ..nums)
+  // }))
+
   show math.equation.where(block: false): it => {
-  if it.has("label") and it.label == label("displayed-inline-math-equation") {
-    it
-  } else {
-    [$display(it)$<displayed-inline-math-equation>]
+    if it.has("label") and it.label == label("displayed-inline-math-equation") {
+      it
+    } else {
+      [$display(it)$<displayed-inline-math-equation>]
+    }
   }
-}
 
   show math.equation: eq => {
     set block(spacing: 0.65em)
@@ -186,53 +170,55 @@
   }
 
   // 配置图像和图像编号
-  set figure(
-    numbering: (..nums) => locate(loc => {
-      numbering("1.1", chaptercounter.at(loc).first(), ..nums)
-    })
-  )
+  set figure(numbering: (..nums) => locate(loc => {
+    numbering("1.1", chaptercounter.at(loc).first(), ..nums)
+  }))
 
   // 配置表格
   set table(
-    fill: (_, row) => if row == 0 {accent_color.lighten(40%)} else {accent_color.lighten(80%)},
-    stroke: 1pt + white
+    fill: (_, row) => if row == 0 { accent_color.lighten(40%) } else { accent_color.lighten(80%) },
+    stroke: 1pt + white,
   )
 
   // set figure(placement: auto)
-  show figure.where(
-    kind: table
-  ): set figure.caption(position: bottom)
-  show figure.where(
-    kind: raw
-  ): it => {
+  show figure.where(kind: table): set figure.caption(position: bottom)
+  show figure.where(kind: raw): it => {
     set block(width: 100%, breakable: true)
     it
   }
 
-
   //------------------------------------------------------------------
   box(width: 100%, height: 40%)[
     // 显示论文的标题和描述。
-    #align(right+bottom)[
+    #align(right + bottom)[
       #text(36pt, weight: "bold")[#title]
       #parbreak()
     ]
   ]
 
-  box(width: 100%, height: 50%)[
-    #align(right+top)[
+  box(
+    width: 100%,
+    height: 50%,
+  )[
+    #align(
+      right + top,
+    )[
       #if authors.len() > 0 {
         box(inset: (y: 10pt), {
           authors.map(author => {
             text(16pt, weight: "semibold")[
               #if "homepage" in author {
                 [#link(author.homepage)[#author.name]]
-              } else { author.name }]
+              } else { author.name }
+            ]
             if "affiliations" in author {
               super(author.affiliations)
             }
             if "github" in author {
-              link(author.github, box(height: 1.1em, baseline: 13.5%)[#image.decode(githubSvg)])
+              link(
+                author.github,
+                box(height: 1.1em, baseline: 13.5%)[#image.decode(githubSvg)],
+              )
             }
           }).join(", ", last: {
             if authors.len() > 2 {
@@ -243,29 +229,30 @@
           })
         })
       }
-   
+
     ]
   ]
 
-  
   pagebreak()
 
   // 显示笔记的目录
   outline(indent: auto)
 
-  
   v(24pt, weak: true)
 
   // 将段落设置为两端对齐，并设置换行。
-  set par(justify: true, linebreaks: "optimized", first-line-indent:2em, leading: 0.8em)
+  set par(
+    justify: true,
+    linebreaks: "optimized",
+    first-line-indent: 2em,
+    leading: 0.8em,
+  )
 
   pagebreak()
 
   // 显示笔记的内容
   body
-  
 }
-
 
 // 函数===========================================================
 #let githubSvg = ```<svg xmlns="http://www.w3.org/2000/svg" width="32" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>```.text
@@ -292,29 +279,28 @@
 <path fill-rule="evenodd" clip-rule="evenodd" d="M45 0C20.1472 0 0 20.1472 0 45V120C0 144.853 20.1472 165 45 165H211C235.853 165 256 144.853 256 120V45C256 20.1472 235.853 0 211 0H45ZM8.736 46.96V118H22.944V92.752H32.448C47.712 92.752 59.808 85.552 59.808 69.328C59.808 52.432 47.712 46.96 32.064 46.96H8.736ZM31.488 81.52H22.944V58.288H31.008C40.8 58.288 45.984 60.976 45.984 69.328C45.984 77.392 41.28 81.52 31.488 81.52ZM71.6152 64.336V118H85.7272V86.032C88.7032 78.256 93.7913 75.376 97.9193 75.376C100.134 75.376 101.55 75.7308 103.362 76.1846C103.435 76.2029 103.509 76.2214 103.583 76.24L105.983 64.144C104.351 63.376 102.623 62.992 99.7432 62.992C94.1752 62.992 88.3193 66.736 84.4792 73.84H84.1913L83.0393 64.336H71.6152ZM108.568 91.216C108.568 108.976 120.856 119.344 134.392 119.344C147.832 119.344 160.12 108.976 160.12 91.216C160.12 73.36 147.832 62.992 134.392 62.992C120.856 62.992 108.568 73.36 108.568 91.216ZM145.72 91.216C145.72 101.296 141.688 107.92 134.392 107.92C127 107.92 122.968 101.296 122.968 91.216C122.968 81.04 127 74.512 134.392 74.512C141.688 74.512 145.72 81.04 145.72 91.216ZM172.021 64.336V138.64H186.133V122.32L185.654 113.584C189.686 117.328 194.294 119.344 198.902 119.344C210.71 119.344 221.749 108.784 221.749 90.352C221.749 73.744 213.878 62.992 200.63 62.992C194.87 62.992 189.301 65.968 184.885 69.904H184.598L183.445 64.336H172.021ZM207.253 90.544C207.253 102.16 202.262 107.728 195.829 107.728C192.95 107.728 189.493 106.768 186.133 103.792V80.08C189.781 76.336 193.046 74.512 196.598 74.512C204.085 74.512 207.253 80.176 207.253 90.544ZM231.441 110.128C231.441 115.408 235.089 119.344 240.177 119.344C245.169 119.344 249.009 115.408 249.009 110.128C249.009 104.848 245.169 101.008 240.177 101.008C235.089 101.008 231.441 104.848 231.441 110.128Z" fill="#001932"/>
 </svg>```.text
 
-
-
 // 配置块引用
 #let blockquote(cite: none, body) = [
   #set text(size: 10.5pt)
   #pad(left: 0.5em)[
     #block(
-    breakable: true,
-    width: 100%,
-    fill: gray.lighten(95%),
-    radius: (left: 4pt, right: 4pt),
-    stroke: (left: 4pt + eastern.darken(20%), rest: 1pt + silver),
-    inset: 1em
+      breakable: true,
+      width: 100%,
+      fill: gray.lighten(95%),
+      radius: (left: 4pt, right: 4pt),
+      stroke: (left: 4pt + eastern.darken(20%), rest: 1pt + silver),
+      inset: 1em,
     )[#body]
   ]
 ]
 
 // 水平标尺
-#let horizontalrule = [#v(0.5em) #line(start: (20%,0%), end: (80%,0%)) #v(0.5em)]
+#let horizontalrule = [#v(0.5em) #line(start: (20%, 0%), end: (80%, 0%)) #v(0.5em)]
 
 // 另外的水平标尺
-#let sectionline = align(center)[#v(0.5em) * \* #sym.space.quad \* #sym.space.quad \* * #v(0.5em)]
-
+#let sectionline = align(
+  center,
+)[#v(0.5em) * \* #sym.space.quad \* #sym.space.quad \* * #v(0.5em)]
 
 // ==== 使用 showybox 和 ctheorems 包创建盒子 ====
 //
@@ -325,7 +311,7 @@
 // |   提示   |  olive                |
 // |   注意   |  red                  |
 // |   引用   |  eastern              |
-// |   定理   |  yellow               |  
+// |   定理   |  yellow               |
 // |   命题   |  navy                 |
 
 #let boxnumbering = "1.1.1.1.1.1"
@@ -333,20 +319,16 @@
 
 #let notebox(name, number, body, _type, _icon, _color) = {
   showybox(
-    title-style: (
-      weight: 1000,
-      color: _color.darken(20%),
-      sep-thickness: 0pt,
-    ),
+    title-style: (weight: 1000, color: _color.darken(20%), sep-thickness: 0pt),
     frame: (
       border-color: _color.darken(20%),
-      title-color:  _color.lighten(80%),
-      body-color:   _color.lighten(80%),
+      title-color: _color.lighten(80%),
+      body-color: _color.lighten(80%),
       thickness: (left: 4pt),
-      radius: 4pt
+      radius: 4pt,
     ),
     title: [#name #h(1fr) #box(height: 0.85em)[#image.decode(_icon)] #_type #number],
-    body
+    body,
   )
 }
 
@@ -356,59 +338,29 @@
   2, // number of base number levels to use
   (name, number, body) => {
     notebox(name, number, body, "定义", _def, orange)
-  }
+  },
 ).with(numbering: boxnumbering)
 
-#let example = thmenv(
-  "example",
-  boxcounting,
-  2,
-  (name, number, body, ..args) => {
-    notebox(name, number, body, "示例", e_g_, blue)
-  }
-).with(numbering: boxnumbering)
+#let example = thmenv("example", boxcounting, 2, (name, number, body, ..args) => {
+  notebox(name, number, body, "示例", e_g_, blue)
+}).with(numbering: boxnumbering)
 
-#let tip = thmenv(
-  "tip",
-  boxcounting,
-  2,
-  (name, number, body) => {
-    notebox(name, number, body, "提示", lightbulb, olive)
-  }
-).with(numbering: boxnumbering)
+#let tip = thmenv("tip", boxcounting, 2, (name, number, body) => {
+  notebox(name, number, body, "提示", lightbulb, olive)
+}).with(numbering: boxnumbering)
 
-#let attention = thmenv(
-  "attention",
-  boxcounting,
-  2,
-  (name, number, body) => {
-    notebox(name, number, body, "注意", _caution, red)
-  }
-).with(numbering: boxnumbering)
+#let attention = thmenv("attention", boxcounting, 2, (name, number, body) => {
+  notebox(name, number, body, "注意", _caution, red)
+}).with(numbering: boxnumbering)
 
-#let quote = thmenv(
-  "quote",
-  boxcounting,
-  2,
-  (name, number, body) => {
-    notebox(name, number, body, "引用", _quote, eastern)
-  }
-).with(numbering: boxnumbering)
+#let quote = thmenv("quote", boxcounting, 2, (name, number, body) => {
+  notebox(name, number, body, "引用", _quote, eastern)
+}).with(numbering: boxnumbering)
 
-#let theorem = thmenv(
-  "theorem",
-  boxcounting,
-  2,
-  (name, number, body) => {
-    notebox(name, number, body, "定理", _thm, yellow)
-  }
-).with(numbering: boxnumbering)
+#let theorem = thmenv("theorem", boxcounting, 2, (name, number, body) => {
+  notebox(name, number, body, "定理", _thm, yellow)
+}).with(numbering: boxnumbering)
 
-#let proposition = thmenv(
-  "proposition",
-  boxcounting,
-  2,
-  (name, number, body) => {
-    notebox(name, number, body, "命题", _prop, navy)
-  }
-).with(numbering: boxnumbering)
+#let proposition = thmenv("proposition", boxcounting, 2, (name, number, body) => {
+  notebox(name, number, body, "命题", _prop, navy)
+}).with(numbering: boxnumbering)
