@@ -72,4 +72,16 @@ return {
     s({ trig = "emp", snippetType = "autosnippet", priority = 2000 }, {
         t("emptyset"),
     }),
+    s(
+        { trig = "ket", snippetType = "autosnippet" },
+        fmta("ket(<>) <>", {
+            i(1), i(2)
+        })
+    ),
+    s(
+        { trig = "bra", snippetType = "autosnippet" },
+        fmta("bra(<>) <>", {
+            i(1), i(2)
+        })
+    ),
 }
