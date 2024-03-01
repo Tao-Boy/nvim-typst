@@ -66,7 +66,7 @@ return {
     }),
 
     s({ trig = "op", wordTrig = false, snippetType = "autosnippet" }, {
-        t("\\oplus"),
+        t("oplus"),
     }),
 
     s({ trig = "emp", snippetType = "autosnippet", priority = 2000 }, {
