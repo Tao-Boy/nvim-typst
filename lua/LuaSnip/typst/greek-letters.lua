@@ -47,9 +47,21 @@ return
         {
             t("epsilon"),
         }),
+    s({ trig = ";E", snippetType = "autosnippet" },
+        {
+            t("Epsilon"),
+        }),
     s({ trig = ";ve", snippetType = "autosnippet" },
         {
-            t("varepsilon"),
+            t("epsilon.alt"),
+        }),
+    s({ trig = ";i", snippetType = "autosnippet" },
+        {
+            t("iota"),
+        }),
+    s({ trig = ";I", snippetType = "autosnippet" },
+        {
+            t("Iota"),
         }),
     s({ trig = ";z", snippetType = "autosnippet" },
         {
@@ -62,7 +74,7 @@ return
         }),
     s({ trig = ";vt", snippetType = "autosnippet" },
         {
-            t("vartheta"),
+            t("theta.alt"),
         }),
     s({ trig = ";T", snippetType = "autosnippet" },
         {
@@ -100,7 +112,7 @@ return
         }),
     s({ trig = ";vp", snippetType = "autosnippet" },
         {
-            t("varphi"),
+            t("phi.alt"),
         }),
     s({ trig = ";P", snippetType = "autosnippet" },
         {
@@ -120,4 +132,3 @@ return
             t("Omega"),
         }),
 }
-

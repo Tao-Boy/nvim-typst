@@ -1,6 +1,6 @@
 #import "@preview/showybox:2.0.1": showybox
 #import "@preview/ctheorems:1.1.0": *
-
+#import "@preview/physica:0.9.2": *
 #let template(
   title: "Notes Title",
   authors: (
@@ -364,3 +364,21 @@
 #let proposition = thmenv("proposition", boxcounting, 2, (name, number, body) => {
   notebox(name, number, body, "命题", _prop, navy)
 }).with(numbering: boxnumbering)
+
+//math
+#let prod = { $product$ }
+#let ddot = { $dot.double$ }
+#let mod(input) = { $abs(input)$ }
+#let bar(inpute) = { $macron(inpute)$ }
+#let hbar = { $planck.reduce$ }
+#let bigcap = { $sect.big$ }
+#let bigcup = { $union.big$ }
+#let bigsqcap = { $sect.sq.big$ }
+#let bigsqcup = { $union.sq.big$ }
+#let bigotimes = { $times.circle.big$ }
+#let otimes = { $times.circle$ }
+#let oplus = { $plus.circle$ }
+#let iff = { $arrow.l.r.double.long$ }
+#let to = { $arrow.r$ }
+#let pm = { $plus.minus$ }
+#let circ = { $circle.stroked.tiny$ }
