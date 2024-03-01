@@ -224,12 +224,6 @@ return {
         })
     ),
     s(
-        { trig = "br", snippetType = "autosnippet" },
-        fmta("bar(<>) <>", {
-            i(1), i(2)
-        })
-    ),
-    s(
         { trig = "(%a)bar", wordTrig = false, regTrig = true, snippetType = "autosnippet" },
         fmta("overline(<>) <>", {
             f(function(_, snip)
