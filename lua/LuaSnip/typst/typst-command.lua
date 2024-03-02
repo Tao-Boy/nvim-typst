@@ -9,7 +9,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 local c = ls.choice_node
-
+local typst = require("util.math")
 
 return {
     s({ trig = "begin", hidden = true },
@@ -25,7 +25,7 @@ return {
         <>
         ]],
             { i(1), i(2) }
-        )
+        ), { condition = typst.in_text }
     ),
 
     s({ trig = "box.def" },
@@ -38,7 +38,8 @@ return {
             {
                 i(1)
             }
-        )
+        ), { condition = typst.in_text }
+
     ),
 
     s({ trig = "box.eg" },
@@ -51,7 +52,8 @@ return {
             {
                 i(1)
             }
-        )
+        ), { condition = typst.in_text }
+
     ),
 
     s({ trig = "box.tip" },
@@ -64,7 +66,8 @@ return {
             {
                 i(1)
             }
-        )
+        ), { condition = typst.in_text }
+
     ),
 
     s({ trig = "box.danger" },
@@ -77,7 +80,8 @@ return {
             {
                 i(1)
             }
-        )
+        ), { condition = typst.in_text }
+
     ),
 
     s({ trig = "box.thm" },
@@ -90,7 +94,8 @@ return {
             {
                 i(1)
             }
-        )
+        ), { condition = typst.in_text }
+
     ),
 
     s({ trig = "box.prop" },
@@ -103,16 +108,18 @@ return {
             {
                 i(1)
             }
-        )
+        ), { condition = typst.in_text }
+
     ),
 
-    s({ trig = "text" },
+    s({ trig = "text", snippetType = "autosnippet", wordTrig = false },
         fmta("<>text(<>,<>pt)[<>]<>", {
             i(1, "#"),
             i(2, "red"),
-            i(3),
+            i(3, "12pt"),
             i(4),
             i(5)
-        })
+        }), { condition = typst.in_text }
+
     ),
 }
