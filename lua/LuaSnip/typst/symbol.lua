@@ -88,4 +88,7 @@ return {
             i(1), i(2)
         }), { condition = typst.in_mathzone }
     ),
+    s({ trig = "cd", snippetType = "autosnippet", priority = 2000 }, {
+        t("dot"),
+    }, { condition = typst.in_mathzone }),
 }
