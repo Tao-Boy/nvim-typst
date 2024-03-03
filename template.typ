@@ -241,12 +241,7 @@
   v(24pt, weak: true)
 
   // 将段落设置为两端对齐，并设置换行。
-  set par(
-    justify: true,
-    linebreaks: "optimized",
-    first-line-indent: 2em,
-    leading: 0.8em,
-  )
+  set par(justify: true, linebreaks: "optimized", leading: 0.8em)
 
   pagebreak()
 
@@ -367,10 +362,10 @@
 
 //math
 #let prod = { $product$ }
-#let ddot = { $dot.double$ }
+#let ddot(input) = { $dot.double(input)$ }
 #let mod(input) = { $abs(input)$ }
 #let bar(inpute) = { $macron(inpute)$ }
-#let hbar = { $planck.reduce$ }
+#let hbr = { $planck.reduce$ }
 #let bigcap = { $sect.big$ }
 #let bigcup = { $union.big$ }
 #let bigsqcap = { $sect.sq.big$ }

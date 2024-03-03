@@ -116,7 +116,7 @@ return {
         fmta("<>text(<>,<>pt)[<>]<>", {
             i(1, "#"),
             i(2, "red"),
-            i(3, "12pt"),
+            i(3, "12"),
             i(4),
             i(5)
         }), { condition = typst.in_text }

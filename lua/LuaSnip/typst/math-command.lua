@@ -90,11 +90,11 @@ return {
         ), { condition = typst.in_mathzone }
     ),
 
-    s({ trig = "//", snippetType = "autosnippet" },
+    s({ trig = "//", snippetType = "autosnippet", priority = 2000 },
         fmta(
             [[frac( <> , <> ) <>]],
             { i(1), i(2), i(3) }
-        ), { condition = typst.in_mathzone }
+        ) --, { condition = typst.in_mathzone }
     ),
 
     s({ trig = "oo", snippetType = "autosnippet" },
