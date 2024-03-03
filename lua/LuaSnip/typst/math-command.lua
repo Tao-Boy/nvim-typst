@@ -358,7 +358,7 @@ return {
     ),
 
 
-    s({ trig = "ddv", snippetType = "autosnippet" },
+    s({ trig = "div", snippetType = "autosnippet" },
         c(1, {
             sn(nil, { t("(dif "), i(1), t(" )/(dif "), i(2), t(" )") }),
             sn(nil, { t("(dif^2 "), i(1), t(" )/(dif^2 "), i(2), t(" )") }),
@@ -366,7 +366,7 @@ return {
 
     ),
 
-    s({ trig = "pdv", snippetType = "autosnippet" },
+    s({ trig = "piv", snippetType = "autosnippet" },
         c(1, {
             sn(nil, { t("(diff "), i(1), t(" )/(diff "), i(2), t(" )") }),
             sn(nil, { t("(diff^2 "), i(1), t(" )/(diff^2 "), i(2), t(" )") }),
