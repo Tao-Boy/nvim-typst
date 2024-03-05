@@ -46,11 +46,7 @@ return {
     }, { condition = typst.in_mathzone }),
 
     s({ trig = "+-", wordTrig = false, snippetType = "autosnippet" }, {
-        t("\\pm"),
-    }, { condition = typst.in_mathzone }),
-
-    s({ trig = "oo", wordTrig = false, snippetType = "autosnippet" }, {
-        t("\\infty"),
+        t("pm"),
     }, { condition = typst.in_mathzone }),
 
     s({ trig = "xx", wordTrig = false, snippetType = "autosnippet" }, {
@@ -78,13 +74,13 @@ return {
     }, { condition = typst.in_mathzone }),
     s(
         { trig = "ket", snippetType = "autosnippet" },
-        fmta("ket(<>) <>", {
+        fmta("ket(<>)<>", {
             i(1), i(2)
         }), { condition = typst.in_mathzone }
     ),
     s(
         { trig = "bra", snippetType = "autosnippet" },
-        fmta("bra(<>) <>", {
+        fmta("bra(<>)<>", {
             i(1), i(2)
         }), { condition = typst.in_mathzone }
     ),
