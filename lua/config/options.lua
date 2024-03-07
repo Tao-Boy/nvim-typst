@@ -1,7 +1,8 @@
 vim.opt.timeoutlen = 300
 vim.b.fileenconding = "utf-8"
 --vim.filetype.add({ extension = { typ = "typst" } })
-
+vim.g.sqlite_clib_path = "C:\\Windows\\System32\\sqlite3.dll"
+vim.g.tex_flavor = "latex"
 
 
 vim.opt.clipboard = 'unnamedplus' -- 使用系统剪切板

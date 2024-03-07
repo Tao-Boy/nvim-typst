@@ -11,7 +11,7 @@ return {
             })
             require("luasnip.loaders.from_lua").load({
                 paths =
-                "C:\\Users\\30338\\AppData\\Local\\nvim\\lua\\LuaSnip"
+                "C:\\Users\\30338\\AppData\\Local\\nvim\\LuaSnip"
             })
             local auto_expand = require("luasnip").expand_auto
             require("luasnip").expand_auto = function(...)
