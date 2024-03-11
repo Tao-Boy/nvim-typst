@@ -1,6 +1,4 @@
 return {
-
-    { 'AndreM222/copilot-lualine' },
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -24,7 +22,7 @@ return {
                         }
                     },
                     lualine_c = { 'filename' },
-                    lualine_x = { 'copilot', 'encoding', 'fileformat', 'filetype' }, -- I added copilot here
+                    lualine_x = { 'encoding', 'fileformat', 'filetype' }, -- I added copilot here
                     lualine_y = { 'progress' },
                     lualine_z = { 'location' }
                 },

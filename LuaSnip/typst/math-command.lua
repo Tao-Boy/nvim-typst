@@ -88,7 +88,7 @@ return {
         fmta(
             [[frac( <> , <> )<>]],
             { i(1), i(2), i(3) }
-        ) --, { condition = typst.in_mathzone }
+        ) , { condition = typst.in_mathzone }
     ),
 
     s({ trig = "oo", snippetType = "autosnippet" },
