@@ -3,9 +3,20 @@ return {
     Lazy = true,
     config = function()
         require 'nvim-treesitter.configs'.setup {
-            ensure_installed = { "typst", "lua", "latex" },
+            ensure_installed = { "lua", "typst" },
             sync_install = true,
             auto_install = false,
+            require 'nvim-treesitter.configs'.setup {
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = "gnn", -- set to `false` to disable one of the mappings
+                        node_incremental = "grn",
+                        scope_incremental = "grc",
+                        node_decremental = "grm",
+                    },
+                },
+            },
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = false,

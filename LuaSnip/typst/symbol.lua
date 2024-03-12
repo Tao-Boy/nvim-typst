@@ -74,14 +74,14 @@ return {
     }, { condition = typst.in_mathzone }),
     s(
         { trig = "ket", snippetType = "autosnippet" },
-        fmta("ket(<>)<>", {
-            i(1), i(2)
+        fmta("ket(<>)", {
+            i(1)
         }), { condition = typst.in_mathzone }
     ),
     s(
         { trig = "bra", snippetType = "autosnippet" },
-        fmta("bra(<>)<>", {
-            i(1), i(2)
+        fmta("bra(<>)", {
+            i(1)
         }), { condition = typst.in_mathzone }
     ),
     s({ trig = "cd", snippetType = "autosnippet", priority = 2000 }, {

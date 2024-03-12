@@ -31,12 +31,13 @@ return {
     s({ trig = "box.def" },
         fmta(
             [[
-        #definition("定义")[
+        #definition("<>")[
            <>
         ]
         ]],
             {
-                i(1)
+                i(1,"定义"),
+                i(2)
             }
         ), { condition = typst.in_text }
 
@@ -45,12 +46,13 @@ return {
     s({ trig = "box.eg" },
         fmta(
             [[
-        #example("示例")[
+        #example("<>")[
            <>
         ]
         ]],
             {
-                i(1)
+                i(1,"例子"),
+                i(2)
             }
         ), { condition = typst.in_text }
 
@@ -59,12 +61,13 @@ return {
     s({ trig = "box.tip" },
         fmta(
             [[
-        #tip("提示")[
+        #tip("<>")[
            <>
         ]
         ]],
             {
-                i(1)
+                i(1,"提示"),
+                i(2)
             }
         ), { condition = typst.in_text }
 
@@ -73,12 +76,13 @@ return {
     s({ trig = "box.danger" },
         fmta(
             [[
-        #attention("注意")[
+        #attention("<>")[
            <>
         ]
         ]],
             {
-                i(1)
+                i(1,"注意"),
+                i(2)
             }
         ), { condition = typst.in_text }
 
@@ -87,12 +91,13 @@ return {
     s({ trig = "box.thm" },
         fmta(
             [[
-        #theorem("定理")[
+        #theorem("<>")[
            <>
         ]
         ]],
             {
-                i(1)
+                i(1,"定理"),
+                i(2)
             }
         ), { condition = typst.in_text }
 
@@ -101,12 +106,13 @@ return {
     s({ trig = "box.prop" },
         fmta(
             [[
-        #proposition("命题")[
+        #proposition("<>")[
            <>
         ]
         ]],
             {
-                i(1)
+                i(1,"命题"),
+                i(2)
             }
         ), { condition = typst.in_text }
 

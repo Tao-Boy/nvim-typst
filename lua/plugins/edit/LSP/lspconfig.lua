@@ -40,11 +40,14 @@ return {
                 capabilities = capabilities,
             }
             lspconfig.typst_lsp.setup {
-                single_file_support = true,
                 capabilities = capabilities,
+                cmd = {"C:\\Users\\30338\\AppData\\Local\\nvim-data\\mason\\packages\\typst-lsp\\tinymist.exe"},
+                root_dir = function ()
+                    return vim.fn.getcwd()
+                end,
                 settings = {
                     exportPdf = "onSave"
-                }
+                },
             }
             lspconfig.texlab.setup {
                 capabilities = capabilities,
