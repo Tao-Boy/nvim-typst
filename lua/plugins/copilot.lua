@@ -1,4 +1,6 @@
 return {
-    "github/copilot.vim",
-    Lazy = true,
+    {
+        "github/copilot.vim",
+        Lazy = true,
+    },
 }
