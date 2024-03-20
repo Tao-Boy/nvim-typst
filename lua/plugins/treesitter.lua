@@ -3,9 +3,9 @@ return {
     Lazy = true,
     config = function()
         require 'nvim-treesitter.configs'.setup {
-            ensure_installed = { "lua", "typst" },
+            ensure_installed = { "lua", "typst","rust" },
             sync_install = true,
-            auto_install = false,
+            auto_install = true,
             require 'nvim-treesitter.configs'.setup {
                 incremental_selection = {
                     enable = true,

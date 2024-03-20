@@ -83,7 +83,7 @@ return {
         ), { condition = typst.in_mathzone }
     ),
 
-    s({ trig = "//", snippetType = "autosnippet", priority = 2000 },
+    s({ trig = "//", snippetType = "autosnippet", priority = 3000 },
         fmta(
             [[frac( <> , <> )]],
             { i(1), i(2) }

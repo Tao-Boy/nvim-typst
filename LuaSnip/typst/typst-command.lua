@@ -18,8 +18,7 @@ return {
         #import "template.typ":*
         #show: template.with(
             title: [<>],
-            accent: orange,
-            background_color: yellow.lighten(85%)
+            accent: orange
         )
 
         <>
@@ -51,22 +50,7 @@ return {
         ]
         ]],
             {
-                i(1,"例子"),
-                i(2)
-            }
-        ), { condition = typst.in_text }
-
-    ),
-
-    s({ trig = "box.tip" },
-        fmta(
-            [[
-        #tip("<>")[
-           <>
-        ]
-        ]],
-            {
-                i(1,"提示"),
+                i(1,"示例"),
                 i(2)
             }
         ), { condition = typst.in_text }

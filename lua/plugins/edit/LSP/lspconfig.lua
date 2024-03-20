@@ -39,6 +39,9 @@ return {
             lspconfig.lua_ls.setup {
                 capabilities = capabilities,
             }
+            lspconfig.rust_analyzer.setup {
+                capabilities = capabilities,
+            }
             lspconfig.typst_lsp.setup {
                 capabilities = capabilities,
                 cmd = {"C:\\Users\\30338\\AppData\\Local\\nvim-data\\mason\\packages\\typst-lsp\\tinymist.exe"},
@@ -48,9 +51,6 @@ return {
                 settings = {
                     exportPdf = "onSave"
                 },
-            }
-            lspconfig.texlab.setup {
-                capabilities = capabilities,
             }
         end,
     }

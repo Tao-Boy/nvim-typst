@@ -299,20 +299,11 @@
 
 // ==== 使用 showybox 和 ctheorems 包创建盒子 ====
 //
-// |   环境   |  强调色                |
-// |---------|-----------------------|
-// |   定义   |  orange               |
-// |   示例   |  blue                 |
-// |   提示   |  olive                |
-// |   注意   |  red                  |
-// |   引用   |  eastern              |
-// |   定理   |  yellow               |
-// |   命题   |  navy                 |
 
 #let boxnumbering = "1.1.1.1.1.1"
 #let boxcounting = "heading"
 
-#let notebox(name, number, body, _type, _icon, _color) = {
+#let notebox(name, number, body, _type, _color) = {
   showybox(
     title-style: (weight: 1000, color: _color.darken(20%), sep-thickness: 0pt),
     frame: (
@@ -322,7 +313,7 @@
       thickness: (left: 4pt),
       radius: 4pt,
     ),
-    title: [#name #h(1fr) #box(height: 0.85em)[#image.decode(_icon)] #_type #number],
+    title: [#name #h(1fr) #box(height: 0.85em)#_type #number],
     body,
   )
 }
@@ -332,32 +323,24 @@
   boxcounting, //base counter name
   2, // number of base number levels to use
   (name, number, body) => {
-    notebox(name, number, body, "定义", _def, orange)
+    notebox(name, number, body, "定义", green)
   },
 ).with(numbering: boxnumbering)
 
 #let example = thmenv("example", boxcounting, 2, (name, number, body, ..args) => {
-  notebox(name, number, body, "示例", e_g_, blue)
-}).with(numbering: boxnumbering)
-
-#let tip = thmenv("tip", boxcounting, 2, (name, number, body) => {
-  notebox(name, number, body, "提示", lightbulb, olive)
+  notebox(name, number, body, "示例", blue)
 }).with(numbering: boxnumbering)
 
 #let attention = thmenv("attention", boxcounting, 2, (name, number, body) => {
-  notebox(name, number, body, "注意", _caution, red)
-}).with(numbering: boxnumbering)
-
-#let quote = thmenv("quote", boxcounting, 2, (name, number, body) => {
-  notebox(name, number, body, "引用", _quote, eastern)
+  notebox(name, number, body, "注意",yellow)
 }).with(numbering: boxnumbering)
 
 #let theorem = thmenv("theorem", boxcounting, 2, (name, number, body) => {
-  notebox(name, number, body, "定理", _thm, yellow)
+  notebox(name, number, body, "定理", orange)
 }).with(numbering: boxnumbering)
 
 #let proposition = thmenv("proposition", boxcounting, 2, (name, number, body) => {
-  notebox(name, number, body, "命题", _prop, navy)
+  notebox(name, number, body, "命题", purple)
 }).with(numbering: boxnumbering)
 
 //math
