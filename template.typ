@@ -17,7 +17,6 @@
   // 主题颜色，必须是 HEX 颜色.
   accent: "#000000",
   cover_image: none,
-  background_color: yellow.lighten(96%),
   // 笔记内容
   body,
 ) = {
@@ -71,12 +70,7 @@
         layout(size => {
           image(cover_image, height: size.height)
         })
-      } else if background_color != none {
-        layout(size => {
-          block(width: 100%, height: 100%, fill: rgb(background_color))
-        })
-      }
-    }),
+      } }),
     header: locate(
       loc => {
         if loc.page() == 1 { return }
