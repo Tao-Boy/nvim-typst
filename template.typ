@@ -155,14 +155,7 @@
   //set math.equation(numbering: (..nums) => locate(loc => {
   // numbering("(1.1.1)", chaptercounter.at(loc).first(), ..nums)
   // }))
-
-  show math.equation.where(block: false): it => {
-    if it.has("label") and it.label == label("displayed-inline-math-equation") {
-      it
-    } else {
-      [$display(it)$<displayed-inline-math-equation>]
-    }
-  }
+  show math.equation: math.display
 
   show math.equation: eq => {
     set block(spacing: 0.65em)
