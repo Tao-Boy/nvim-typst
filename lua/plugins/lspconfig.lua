@@ -20,7 +20,8 @@ return {
                 --     settings = {}
                 -- },
                 -- ltex = {}
-            }
+                digestif = {}
+            },
         }
         -- event        = { "BufReadPre", "BufNewFile" },
         -- dependencies = {
